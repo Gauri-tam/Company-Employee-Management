@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+application:
+  security:
+    jwt:
+      security-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 600000
+      refresh-token:
+        expiration: 86400000
