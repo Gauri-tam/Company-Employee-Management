@@ -1,4 +1,4 @@
-package com.Management.entity;
+package com.Management.enamurate;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,10 +6,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import static com.Management.entity.Permission.*;
+import static com.Management.enamurate.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {

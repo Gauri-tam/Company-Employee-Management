@@ -1,4 +1,4 @@
-package com.Management.entity;
+package com.Management.enamurate;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

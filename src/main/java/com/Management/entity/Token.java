@@ -1,6 +1,6 @@
 package com.Management.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.Management.enamurate.TokenType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

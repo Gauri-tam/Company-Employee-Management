@@ -1,4 +1,4 @@
-package com.Management.entity;
+package com.Management.enamurate;
 
 public enum TokenType {
     BEARER
