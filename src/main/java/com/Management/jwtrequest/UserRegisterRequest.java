@@ -24,12 +24,12 @@ public class UserRegisterRequest {
     @Size(min = 3, max = 20, message = "Characters Between 3 to 20")
     private String lastName;
 
-    @Email(regexp = "^[a-z]([a-z0-9][a-zA-Z0-9]*)?&", message = "Invalid Email!")
+    @Email(message = "Invalid Email!")
     private String email;
 
     @Size(min = 8, message = "Minimum 8 Character are required! ")
     @NotEmpty(message = "This Filed is Not to be Empty")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,20}&", message = "Invalid Password! ")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "Invalid Password! ")
     private String password;
     private Role role;
 }

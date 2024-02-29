@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserAuthenticateRequest {
 
-    @Email(regexp = "^[a-z]([a-z0-9][a-zA-Z0-9]*)?&", message = "Invalid Email!")
-    private String email;
+    @Email(message = "Invalid Email!")
+    private String username;
 
     @Size(min = 8, message = "Minimum 8 Character are required! ")
     @NotEmpty(message = "This Filed is Not to be Empty")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,20}&", message = "Invalid Password! ")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "Invalid Password! ")
     private String password;
 }
