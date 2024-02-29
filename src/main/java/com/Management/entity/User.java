@@ -1,5 +1,6 @@
 package com.Management.entity;
 
+import com.Management.enamurate.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
