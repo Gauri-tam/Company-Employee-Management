@@ -1,7 +1,6 @@
 package com.Management.services;
 
 import com.Management.repository.TokenRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
 import java.io.PrintWriter;
-import java.io.Writer;
 
 @Service
 @RequiredArgsConstructor

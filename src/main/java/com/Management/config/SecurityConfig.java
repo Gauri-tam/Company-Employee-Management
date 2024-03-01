@@ -4,7 +4,6 @@ import com.Management.component.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,8 +30,8 @@ public class SecurityConfig {
     private final LogoutHandler logoutHandler;
 
     private static final String[] URLS = {
-            "/api/v1/auth/**", // it will user registration/authentication
-            "/api/v1/ceo/register/**"  // creating on
+            "/api/v1/auth/**", // it will user registration/authentication ;
+            "/api/v1/ceo/register/**"  // create manager , team leader ;
     };
 
     @Bean
