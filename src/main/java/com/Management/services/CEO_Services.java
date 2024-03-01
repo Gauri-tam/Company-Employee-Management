@@ -28,7 +28,6 @@ public class CEO_Services {
 
     private final UserRepository userRepository;
 
-
     public UserRegisterResponse createManager(UserRegisterRequest request, HttpServletRequest req) {
         // basic authentication we want it so just do like authentication;
         assert req != null;

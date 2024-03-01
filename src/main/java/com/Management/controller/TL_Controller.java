@@ -53,7 +53,7 @@ public class TL_Controller {
         return ResponseEntity.ok(departmentServices.getByPage(pageable, empName));
     }
 
-    // http://localhost:8080/api/v1/comp/dept/task
+    // http://localhost:8080/api/v1/tl/dept/task
     @GetMapping("/dept/task")
     public ResponseEntity<Page<Department>> getByDeptByTask(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
                                                             @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize,
@@ -61,7 +61,6 @@ public class TL_Controller {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return ResponseEntity.ok(departmentServices.getByDeptByTask(pageable, taskName));
     }
-
 
     @GetMapping("/dept/{id}")
     public ResponseEntity<Department> getByIdDept(@PathVariable("id") Integer id){

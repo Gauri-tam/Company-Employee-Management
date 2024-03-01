@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MangerController {
 
+    // http://localhost:8080/api/v1/manager/dept/get
+
     private final DepartmentServices departmentServices;
+
     private final EmployeeServices employeeServices;
+
     private final TaskServices taskServices;
 
     /**
@@ -72,7 +76,6 @@ public class MangerController {
     public ResponseEntity<Department> getByIdEmp(@PathVariable("id") Integer id){
         return ResponseEntity.ok(departmentServices.getById(id));
     }
-
 
     /**
      * Accessing access all operation except delete Operation of Employee
