@@ -21,7 +21,7 @@ public enum Role {
                     MANAGER_CREATE,
                     MANAGER_READ,
                     MANAGER_UPDATE,
-                    TL_READ
+                    TEAM_LEADER_READ
             )
     ),
     MANAGER(
@@ -31,9 +31,9 @@ public enum Role {
                     MANAGER_UPDATE
             )
     ),
-    TL(
+    TEAM_LEADER(
             Set.of(
-                    TL_READ
+                    TEAM_LEADER_READ
             )
     );
 

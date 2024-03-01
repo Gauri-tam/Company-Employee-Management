@@ -21,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,30 +37,47 @@ public class JwtAuthenticationServices {
 
     private final JwtServices jwtServices;
 
-    public UserRegisterResponse register(UserRegisterRequest request) {
-        var user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .password(bCryptPasswordEncoder.encode(request.getPassword()))
-                .role(Role.TL)
-                .build();
-        userRepository.save(user);
-        return UserRegisterResponse.builder()
-                .userName(request.getFirstName()+" "+request.getLastName())
-                .message("Team Lead is Added to the DataBase!")
-                .build();
+    public UserRegisterResponse register(UserRegisterRequest request, HttpServletRequest req) throws Exception {
+        final String header = req.getHeader(HttpHeaders.AUTHORIZATION);
+            if ( header == null ){
+                var user = User.builder()
+                        .firstName(request.getFirstName())
+                        .lastName(request.getLastName())
+                        .email(request.getEmail())
+                        .password(bCryptPasswordEncoder.encode(request.getPassword()))
+                        .role(Role.CEO)
+                        .build();
+                Optional<User> newUser = userRepository.findByEmail(request.getEmail());
+                if (newUser.isPresent()){
+//                throw new Exception("This User Email Is Already Present In DataBase!");
+                    return UserRegisterResponse.builder()
+                            .userName(request.getFirstName()+" "+request.getLastName())
+                            .message("This User Email Is Already Present In DataBase")
+                            .build();
+                }
+                userRepository.save(user);
+                return UserRegisterResponse.builder()
+                        .userName(request.getFirstName()+" "+request.getLastName())
+                        .message("Central Executive Officer is added to DataBase")
+                        .build();
+            }else {
+                return UserRegisterResponse.builder()
+                        .userName(request.getFirstName()+" "+request.getLastName())
+                        .message("Authorization must be Empty!")
+                        .build();
+
+            }
     }
 
-    public UserAuthenticateResponse authenticate(UserAuthenticateRequest request) {
+    public UserAuthenticateResponse authenticate(UserAuthenticateRequest request, HttpServletRequest req) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()));
         var user = userRepository.findByEmail(request.getUsername()).orElseThrow();
         var access = jwtServices.generateAccessToken(user);
-        var refresh = jwtServices.generateAccessToken(user);
+        var refresh = jwtServices.generateRefreshToken(user);
+        revokeALlToken(user); // always revoke first than store it
         storeUserToken(user, access);
-        revokeALlToken(user);
         return UserAuthenticateResponse.builder()
                 .accessToken(access)
                 .refreshToken(refresh)
@@ -81,16 +99,16 @@ public class JwtAuthenticationServices {
         var userToken = tokenRepository.findTokenByUserId(user.getUserId());
         if (userToken.isEmpty()){return; }
         userToken.forEach(t->{
-            t.setExpired(false);
-            t.setRevoked(false);
+            t.setExpired(true);
+            t.setRevoked(true);
+            tokenRepository.saveAll(userToken);
         });
-        tokenRepository.saveAll(userToken);
     }
 
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        final String refreshToken ;
-        final String userName ;
+        final String refreshToken;
+        final String userName;
         if (authHeader == null || !authHeader.startsWith("Bearer ")){
             return;
         }
@@ -100,8 +118,8 @@ public class JwtAuthenticationServices {
         if (userName != null) {
             var user = userRepository.findByEmail(userName).orElseThrow();
             var accessToken = jwtServices.generateAccessToken(user);
-            storeUserToken(user, accessToken);
             revokeALlToken(user);
+            storeUserToken(user, accessToken);
             if (jwtServices.isTokenValid(refreshToken, user)){
                 var getRefreshToken = UserAuthenticateResponse.builder()
                         .accessToken(accessToken)

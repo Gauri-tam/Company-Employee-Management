@@ -18,10 +18,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TL_Controller {
 
+    // http://localhost:8080/api/v1/tl/task/1
+
     private final DepartmentServices departmentServices;
+
     private final EmployeeServices employeeServices;
+
     private final TaskServices taskServices;
 
+    /**
+     * Accessing only get Operation of Department
+     * */
 
     @GetMapping("/dept/get")
     public ResponseEntity<Page<Department>> getAllDept(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
@@ -61,7 +68,9 @@ public class TL_Controller {
         return ResponseEntity.ok(departmentServices.getById(id));
     }
 
-    //---------------------------------------------------------------------------------------
+    /**
+     * Accessing only get Operation of Employee
+     * */
 
     @GetMapping("/emp/get")
     public ResponseEntity<Page<Employee>> getAll(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
@@ -91,10 +100,13 @@ public class TL_Controller {
         return ResponseEntity.ok(employeeServices.getById(id));
     }
 
-    //---------------------------------------------------------------------------------------
+    /**
+     * Accessing only get Operation of Task
+     * */
+
     @GetMapping("/task/get")
     public ResponseEntity<Page<Task>> getAllTask(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
-                                             @RequestParam(value = "pagesize", defaultValue = "5", required = true) Integer pageSize){
+                                             @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return ResponseEntity.ok(taskServices.getAll(pageable));
     }

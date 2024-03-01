@@ -26,16 +26,16 @@ public class JwtAuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<UserRegisterResponse> registration(
-           @Valid @RequestBody UserRegisterRequest request ){
+           @Valid @RequestBody UserRegisterRequest request, HttpServletRequest req) throws Exception {
         return ResponseEntity.ok(
-        jwtAuthenticationServices.register(request));
+        jwtAuthenticationServices.register(request, req));
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<UserAuthenticateResponse> authenticate(
-           @Valid @RequestBody UserAuthenticateRequest request){
+           @Valid @RequestBody UserAuthenticateRequest request, HttpServletRequest req){
         return ResponseEntity.ok(
-                jwtAuthenticationServices.authenticate(request));
+                jwtAuthenticationServices.authenticate(request, req));
     }
 
     @PostMapping("/refresh")

@@ -18,6 +18,7 @@ public class Token{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tokenId;
     private String token;
+    @Enumerated(EnumType.STRING)
     private TokenType tokenType;
     private boolean revoked;
     private boolean expired;

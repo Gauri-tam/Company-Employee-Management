@@ -13,7 +13,7 @@ public enum Permission {
     MANAGER_CREATE("create"),
     MANAGER_READ("read"),
     MANAGER_UPDATE("update"),
-    TL_READ("read");
+    TEAM_LEADER_READ("read");
 
     @Getter
     private final String permissions;

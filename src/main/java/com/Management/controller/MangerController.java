@@ -22,6 +22,9 @@ public class MangerController {
     private final EmployeeServices employeeServices;
     private final TaskServices taskServices;
 
+    /**
+     * Accessing access all operation except delete Operation of Department
+     * */
 
     @PostMapping("/dept")
     public ResponseEntity<Department> create(@RequestBody Department department){
@@ -70,7 +73,10 @@ public class MangerController {
         return ResponseEntity.ok(departmentServices.getById(id));
     }
 
-    //----------------------------------------------------------------------------------------------------
+
+    /**
+     * Accessing access all operation except delete Operation of Employee
+     * */
 
     @PostMapping("/emp")
     public ResponseEntity<Employee> create(@RequestBody Employee employee){
@@ -110,7 +116,9 @@ public class MangerController {
         return ResponseEntity.ok(employeeServices.getById(id));
     }
 
-    //----------------------------------------------------------------------------------------------------
+    /**
+     * Accessing access all operation except delete Operation of Task
+     * */
 
     @PostMapping("/task")
     public ResponseEntity<Task> create(@RequestBody Task task){
@@ -124,7 +132,7 @@ public class MangerController {
 
     @GetMapping("/task/get")
     public ResponseEntity<Page<Task>> getAllTask(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
-                                             @RequestParam(value = "pagesize", defaultValue = "5", required = true) Integer pageSize){
+                                             @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return ResponseEntity.ok(taskServices.getAll(pageable));
     }

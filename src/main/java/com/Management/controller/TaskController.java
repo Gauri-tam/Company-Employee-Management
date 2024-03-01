@@ -31,7 +31,7 @@ public class TaskController {
 
     @GetMapping("/task/get")
     public ResponseEntity<Page<Task>> getAll(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
-                                             @RequestParam(value = "pagesize", defaultValue = "5", required = true) Integer pageSize){
+                                             @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return ResponseEntity.ok(taskServices.getAll(pageable));
     }
