@@ -39,9 +39,9 @@ public class DepartmentController {
     @GetMapping("/dept/role")
     public ResponseEntity<Page<Department>> getDeptByRole(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
                                                           @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize,
-                                                          @RequestParam(value = "role", defaultValue = "Dovloper", required = true) String role ){
+                                                          @RequestParam(value = "empRole", defaultValue = "D-1", required = true) String empRole ){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return ResponseEntity.ok(departmentServices.getAllDeptByRole(pageable, role));
+        return ResponseEntity.ok(departmentServices.getAllDeptByRole(pageable, empRole));
     }
 
     @GetMapping("/dept/page")

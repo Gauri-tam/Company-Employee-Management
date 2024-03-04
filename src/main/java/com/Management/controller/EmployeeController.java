@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/v1/comp")
 public class EmployeeController {
 
-    // http://localhost:8080/api/v1/comp/emp/task
+    // http://localhost:8080/api/v1/comp/emp/page
 
     private final EmployeeServices employeeServices;
 
@@ -43,7 +43,7 @@ public class EmployeeController {
     @GetMapping("/emp/page")
     public ResponseEntity<Page<Department>> getByPage(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
                                                       @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize ,
-                                                      @RequestParam(value = "deptName", defaultValue = "Tester", required = true) String deptName ){
+                                                      @RequestParam(value = "deptName", defaultValue = "T-1", required = true) String deptName ){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return ResponseEntity.ok(employeeServices.getByPage(pageable , deptName));
     }

@@ -57,8 +57,8 @@ public class DepartmentServices {
         return employeeRepo.findAllByDeptName(pageable, empName);
     }
 
-    public Page<Department> getAllDeptByRole(Pageable pageable, String role) {
-        return departmentRepo.findAllDeptByRole(pageable, role);
+    public Page<Department> getAllDeptByRole(Pageable pageable, String empRole) {
+        return departmentRepo.findAllDeptByRole(pageable, empRole);
     }
 
     public Page<Department> getByDeptByTask(Pageable pageable, String taskName) {
