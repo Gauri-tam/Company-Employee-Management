@@ -17,16 +17,23 @@ public class LogoutHandlerService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
 
+    private final JwtServices jwtServices;
+
+    private final EmailService emailService;
+
     @SneakyThrows
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         String authHeader = request.getHeader("Authorization");
         String token;
+        String userEmail;
         if (authHeader == null || !authHeader.startsWith("Bearer ")){
             return;
         }
         token = authHeader.substring(7);
        var userToken = tokenRepository.findUserByToken(token).orElseThrow();
+        userEmail = jwtServices.extractUserName(token);
+        emailService.sentLogoutMail(userEmail);
         if (userToken != null){
             userToken.setRevoked(true);
             userToken.setExpired(true);

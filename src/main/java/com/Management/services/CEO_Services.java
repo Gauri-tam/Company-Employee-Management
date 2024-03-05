@@ -24,6 +24,8 @@ public class CEO_Services {
     @Value("${security.jwt.password}")
     private String password; //ceo-password
 
+    private final EmailService emailService;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final UserRepository userRepository;
@@ -44,7 +46,7 @@ public class CEO_Services {
                 var user = User.builder()
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
-                        .email(request.getEmail())
+                        .email(emailService.sentManagerMail(request.getEmail()))
                         .password(bCryptPasswordEncoder.encode(request.getPassword()))
                         .role(Role.MANAGER)
                         .build();
@@ -94,7 +96,7 @@ public class CEO_Services {
                 var user = User.builder()
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
-                        .email(request.getEmail())
+                        .email(emailService.sentTeamLeaderMail(request.getEmail()))
                         .password(bCryptPasswordEncoder.encode(request.getPassword()))
                         .role(Role.TEAM_LEADER)
                         .build();

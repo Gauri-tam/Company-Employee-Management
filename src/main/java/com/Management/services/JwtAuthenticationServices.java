@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,8 @@ public class JwtAuthenticationServices {
 
     private final AuthenticationManager authenticationManager;
 
+    private final EmailService emailService;
+
     private final TokenRepository tokenRepository;
 
     private final JwtServices jwtServices;
@@ -43,7 +46,7 @@ public class JwtAuthenticationServices {
                 var user = User.builder()
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
-                        .email(request.getEmail())
+                        .email(emailService.sentCeoMail(request.getEmail()))
                         .password(bCryptPasswordEncoder.encode(request.getPassword()))
                         .role(Role.CEO)
                         .build();
@@ -69,14 +72,18 @@ public class JwtAuthenticationServices {
             }
     }
 
-    public UserAuthenticateResponse authenticate(UserAuthenticateRequest request, HttpServletRequest req) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                request.getUsername(),
-                request.getPassword()));
-        var user = userRepository.findByEmail(request.getUsername()).orElseThrow();
+    public UserAuthenticateResponse authenticate(UserAuthenticateRequest request) throws Exception {
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    request.getUsername(),
+                    request.getPassword()));
+        }catch ( Exception e){
+           throw new Exception("Bad Credential");
+        }
+        var user = userRepository.findByEmail(emailService.sentEmailToUser( request.getUsername())).orElseThrow();
         var access = jwtServices.generateAccessToken(user);
         var refresh = jwtServices.generateRefreshToken(user);
-        revokeALlToken(user); // always revoke first than store it
+        revokeAllToken(user); // always revoke first than store it
         storeUserToken(user, access);
         return UserAuthenticateResponse.builder()
                 .accessToken(access)
@@ -95,7 +102,7 @@ public class JwtAuthenticationServices {
         tokenRepository.save(userToken);
     }
 
-    private void revokeALlToken(User user) {
+    private void revokeAllToken(User user) {
         var userToken = tokenRepository.findTokenByUserId(user.getUserId());
         if (userToken.isEmpty()){return; }
         userToken.forEach(t->{
@@ -116,9 +123,9 @@ public class JwtAuthenticationServices {
         refreshToken = authHeader.substring(7);
         userName = jwtServices.extractUserName(refreshToken);
         if (userName != null) {
-            var user = userRepository.findByEmail(userName).orElseThrow();
+            var user = userRepository.findByEmail(emailService.sentEmailToUser(userName)).orElseThrow();
             var accessToken = jwtServices.generateAccessToken(user);
-            revokeALlToken(user);
+            revokeAllToken(user);
             storeUserToken(user, accessToken);
             if (jwtServices.isTokenValid(refreshToken, user)){
                 var getRefreshToken = UserAuthenticateResponse.builder()

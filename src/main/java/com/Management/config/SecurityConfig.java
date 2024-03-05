@@ -31,14 +31,15 @@ public class SecurityConfig {
 
     private static final String[] URLS = {
             "/api/v1/auth/**", // it will user registration/authentication ;
-            "/api/v1/ceo/register/**"  // create manager , team leader ;
+            "/api/v1/ceo/register/**" , // create manager , team leader ;
+           // "/api/v1/email/**" // for sending the email. -> testing
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req->req
-                        .requestMatchers("/api/v1/comp/**").permitAll() // it will set all (dept/emp/task)
+                        //.requestMatchers("/api/v1/comp/**").permitAll() // it will set all (dept/emp/task)
                         .requestMatchers(URLS).permitAll() // it will  registration/authentication
                         .requestMatchers( "/api/v1/ceo/**").hasRole(CEO.name())
                         .requestMatchers(GET, "/api/v1/ceo/**").hasAuthority(CEO_READ.name())

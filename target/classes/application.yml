@@ -2,6 +2,17 @@ spring:
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gauri@weetechsolution.com
+    password: Gauri@123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 application:
   security:
     jwt:

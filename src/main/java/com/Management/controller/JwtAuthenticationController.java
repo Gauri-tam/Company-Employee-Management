@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -33,9 +30,9 @@ public class JwtAuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<UserAuthenticateResponse> authenticate(
-           @Valid @RequestBody UserAuthenticateRequest request, HttpServletRequest req){
+           @Valid @RequestBody UserAuthenticateRequest request) throws Exception {
         return ResponseEntity.ok(
-                jwtAuthenticationServices.authenticate(request, req));
+                jwtAuthenticationServices.authenticate(request));
     }
 
     @PostMapping("/refresh")
