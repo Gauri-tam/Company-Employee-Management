@@ -2,6 +2,8 @@ package com.Management.controller;
 
 import com.Management.entity.EmailDetails;
 import com.Management.services.EmailService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/email")
+@Tag(name = "Email Controller", description = "it will use for only testing purpose")
+@Hidden
 @RequiredArgsConstructor
 public class EmailController {
 

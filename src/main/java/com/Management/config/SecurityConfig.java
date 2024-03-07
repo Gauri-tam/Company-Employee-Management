@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static com.Management.enamurate.Permission.*;
 import static com.Management.enamurate.Role.*;
@@ -30,28 +31,32 @@ public class SecurityConfig {
     private final LogoutHandler logoutHandler;
 
     private static final String[] URLS = {
-            "/api/v1/auth/**", // it will user registration/authentication ;
-            "/api/v1/ceo/register/**" , // create manager , team leader ;
-           // "/api/v1/email/**" // for sending the email. -> testing
+            "/api/v1/auth/**",                                                                                            // it will user registration/authentication ;
+            "/api/v1/ceo/register/**" ,                                                                                   // create manager , team leader ;
+//           // "/api/v1/email/**",                                                                                       // for sending the email. -> testing
+            "/v3/api-docs",                                                                                               // get swagger -> for testing
+            "/swagger-ui/**",                                                                                             // get swagger-ui -> for testing
+            "/swagger-ui",                                                                                                // get swagger-ui -> for testing
+            "/swagger-ui.html",                                                                                           // get swagger-ui -> for testing
+            "/swagger-ui/index.html",
+            "/v3/api-docs/**"                                                                                              // get swagger -> for testing
     };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req->req
-                        //.requestMatchers("/api/v1/comp/**").permitAll() // it will set all (dept/emp/task)
-                        .requestMatchers(URLS).permitAll() // it will  registration/authentication
+//                        .requestMatchers("/api/v1/comp/**").permitAll()                                                  // it will set all (dept/emp/task)
+                        .requestMatchers(URLS).permitAll()                                                                 // it will  registration/authentication
                         .requestMatchers( "/api/v1/ceo/**").hasRole(CEO.name())
                         .requestMatchers(GET, "/api/v1/ceo/**").hasAuthority(CEO_READ.name())
                         .requestMatchers(POST, "/api/v1/ceo/**").hasAuthority(CEO_CREATE.name())
                         .requestMatchers(PUT, "/api/v1/ceo/**").hasAuthority(CEO_UPDATE.name())
                         .requestMatchers(DELETE, "/api/v1/ceo/**").hasAuthority(CEO_DELETE.name())
-
                         .requestMatchers("/api/v1/manager/**").hasAnyRole(CEO.name(), MANAGER.name())
                         .requestMatchers(GET, "/api/v1/manager/**").hasAnyAuthority(CEO_READ.name(), MANAGER_READ.name())
                         .requestMatchers(POST, "/api/v1/manager/**").hasAnyAuthority(CEO_CREATE.name(), MANAGER_CREATE.name())
                         .requestMatchers(PUT, "/api/v1/manager/**").hasAnyAuthority(CEO_UPDATE.name(), MANAGER_UPDATE.name())
-
                         .requestMatchers("/api/v1/tl/**").hasAnyRole(CEO.name(), MANAGER.name(), TEAM_LEADER.name())
                         .requestMatchers(GET, "/api/v1/tl/**").hasAnyAuthority(CEO_READ.name(), MANAGER_READ.name())
                 .anyRequest().authenticated())

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.Properties;
 
-
 @Service
 @RequiredArgsConstructor
 public class EmailService {
@@ -93,7 +92,7 @@ public class EmailService {
                 +"Thank you!";
         if (!email.isEmpty()){
             sentEmail(email, subject, msg);
-            System.out.println("Email Sent!...");
+            System.out.println("Email Sent To User !");
         }
         return email;
     }
@@ -107,6 +106,7 @@ public class EmailService {
 
         if (!email.isEmpty()){
             sentEmail(email, subject, msg);
+            System.out.println("Email Sent To User !");
         }
         return email;
     }
@@ -120,6 +120,7 @@ public class EmailService {
 
         if (!email.isEmpty()){
             sentEmail(email, subject, msg);
+            System.out.println("Email Sent To User !");
         }
         return email;
     }
@@ -132,6 +133,7 @@ public class EmailService {
 
         if (!email.isEmpty()){
             sentEmail(email, subject, msg);
+            System.out.println("Email Sent To User !");
         }
         return email;
     }
@@ -145,6 +147,7 @@ public class EmailService {
 
         if (!email.isEmpty()){
             sentEmail(email, subject, msg);
+            System.out.println("Email Sent To User !");
         }
         return email;
     }

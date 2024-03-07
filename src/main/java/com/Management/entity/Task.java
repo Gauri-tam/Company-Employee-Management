@@ -2,6 +2,7 @@ package com.Management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer taskId;
     private String taskName;
-
     @JsonIgnore
     @ManyToMany(mappedBy = "tasks")
     private List<Employee> employeeList;

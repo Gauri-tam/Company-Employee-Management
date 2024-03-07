@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserAuthenticateRequest {
 
+    @NotEmpty(message = "This Filed is Not to be Empty")
     @Email(message = "Invalid Email!")
     private String username;
 

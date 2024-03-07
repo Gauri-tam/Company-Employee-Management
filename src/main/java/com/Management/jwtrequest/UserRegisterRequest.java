@@ -24,6 +24,7 @@ public class UserRegisterRequest {
     @Size(min = 3, max = 20, message = "Characters Between 3 to 20")
     private String lastName;
 
+    @NotEmpty(message = "This Filed is Not to be Empty")
     @Email(message = "Invalid Email!")
     private String email;
 

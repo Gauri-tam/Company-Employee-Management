@@ -6,6 +6,8 @@ import com.Management.entity.Task;
 import com.Management.services.DepartmentServices;
 import com.Management.services.EmployeeServices;
 import com.Management.services.TaskServices;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/manager")
+@Tag(name ="Manager Controller", description = "it is Use for all MANAGER operations and its token Only ")
 @RequiredArgsConstructor
 public class MangerController {
 
@@ -92,6 +95,7 @@ public class MangerController {
     }
 
     @GetMapping("/emp/get")
+    @Hidden
     public ResponseEntity<Page<Employee>> getAllEmp(@RequestParam(value = "pageNo", defaultValue = "0", required = true) Integer pageNo,
                                                  @RequestParam(value = "pageSize", defaultValue = "5", required = true) Integer pageSize){
         Pageable pageable = PageRequest.of(pageNo, pageSize);
