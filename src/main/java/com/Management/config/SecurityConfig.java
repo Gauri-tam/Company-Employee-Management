@@ -13,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static com.Management.enamurate.Permission.*;
 import static com.Management.enamurate.Role.*;
@@ -33,7 +32,6 @@ public class SecurityConfig {
     private static final String[] URLS = {
             "/api/v1/auth/**",                                                                                            // it will user registration/authentication ;
             "/api/v1/ceo/register/**" ,                                                                                   // create manager , team leader ;
-//           // "/api/v1/email/**",                                                                                       // for sending the email. -> testing
             "/v3/api-docs",                                                                                               // get swagger -> for testing
             "/swagger-ui/**",                                                                                             // get swagger-ui -> for testing
             "/swagger-ui",                                                                                                // get swagger-ui -> for testing
