@@ -24,6 +24,9 @@ public class UserRegisterRequest {
     @Size(min = 3, max = 20, message = "Characters Between 3 to 20")
     private String lastName;
 
+    /** for more pattern and restrictions for email
+     * you can refer https://www.baeldung.com/java-email-validation-regex
+     * */
     @NotEmpty(message = "This Filed is Not to be Empty")
     @Email(message = "Invalid Email!")
     private String email;

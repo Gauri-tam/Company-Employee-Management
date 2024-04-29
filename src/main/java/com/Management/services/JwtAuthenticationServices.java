@@ -135,6 +135,5 @@ public class JwtAuthenticationServices {
                 new ObjectMapper().writeValue(response.getOutputStream(), getRefreshToken);
             }
         }
-
     }
 }
