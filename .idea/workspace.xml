@@ -3,6 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ca6de783-cc15-4f84-8b16-bf1c8cc5b1a8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Management/jwtrequest/UserRegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Management/jwtrequest/UserRegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/Management/jwtrequest/UserRegisterRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/Management/jwtrequest/UserRegisterRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/comp.Management-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/comp.Management-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/comp.Management-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/comp.Management-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,23 +29,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="emp_management: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="FileTemplateManagerImpl">

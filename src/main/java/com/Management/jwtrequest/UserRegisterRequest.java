@@ -26,6 +26,7 @@ public class UserRegisterRequest {
 
     /** for more pattern and restrictions for email
      * you can refer https://www.baeldung.com/java-email-validation-regex
+     * "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
      * */
     @NotEmpty(message = "This Filed is Not to be Empty")
     @Email(message = "Invalid Email!")
